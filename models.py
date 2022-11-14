@@ -41,10 +41,10 @@ class Pet(db.Model):
     )
 
     # select from ['baby', 'young', 'adult', 'senior']
+    # wtform options / validation handle this
     age = db.Column(
         db.String,
         nullable=False,
-
     )
 
     notes = db.Column(
