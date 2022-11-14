@@ -14,7 +14,7 @@ p1 = Pet(
 )
 
 p2 = Pet(
-    name='Arlo'
+    name='Arlo',
     species='Canis familiaris',
     age='young',
     available=False,
