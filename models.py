@@ -6,12 +6,6 @@ db = SQLAlchemy()
 
 DEFAULT_IMG_URL = "https://www.shutterstock.com/image-vector/dog-outline-icon-pet-vector-illustration-1497500723"
 
-def connect_db(app):
-    """Connect to database."""
-
-    db.app = app
-    db.init_app(app)
-
 
 class Pet(db.Model):
     """Pet for adoption."""
@@ -56,3 +50,10 @@ class Pet(db.Model):
         nullable=False,
         default=True,
     )
+
+
+def connect_db(app):
+    """Connect to database."""
+
+    db.app = app
+    db.init_app(app)
