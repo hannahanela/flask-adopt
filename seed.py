@@ -7,7 +7,7 @@ db.create_all()
 p1 = Pet(
     name='Gus',
     species='domestic shorthair',
-    photo_url='',
+    photo_url='https://www.petfoodindustry.com/ext/resources/Images-by-month-year/21_07/Russian-blue-cat.jpg?t=1627569905&width=700',
     age='adult',
     notes='A very grumpy boy.',
     available=True,
