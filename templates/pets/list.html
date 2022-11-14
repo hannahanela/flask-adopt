@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Fluffy's Adoption Co. {% endblock %}
+
+{% block content %}
+
+<h2>Pets</h2>
+
+{% for pet in pets %}
+  <img src="{{ pet.photo_url }}" alt="{{ pet.name }}">
+  <p>
+    {{ pet.name }} {% if pet.available == True %}<b>is available!</b>{% endif %}
+  </p>
+{% endfor %}
+
+<a href="">Add a Pet</a>
+
+{% endblock %}
