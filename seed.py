@@ -16,6 +16,7 @@ p1 = Pet(
 p2 = Pet(
     name='Arlo',
     species='Canis familiaris',
+    photo_url='https://etc.usf.edu/clipart/70400/70421/70421_262_rg-240_o_sm.gif',
     age='young',
     available=False,
 )
