@@ -7,7 +7,6 @@ from forms import AddPetForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///adopt"
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hannahanela:foofoo@localhost/adopt'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -25,7 +24,8 @@ def homepage_index():
     pets = Pet.query.all()
 
     return render_template('pets/list.html', pets=pets)
- 
+
+
 @app.route('/add', methods=['GET', 'POST'])
 def add_pet():
     """Pet add form; handle creating a new pet."""
@@ -33,17 +33,22 @@ def add_pet():
     form = AddPetForm()
 
     if form.validate_on_submit():
-        name = form.name.data
-        species = form.species.data
         photo_url = form.photo_url.data
-        age = form.age.data
-        notes = form.notes.data
+        photo_url = photo_url if photo_url else None
 
-        # create a new Pet model
-        # add to db
-        # commit to db
+        pet = Pet(
+            name=form.name.data,
+            species=form.species.data,
+            photo_url=photo_url,
+            age=form.age.data,
+            notes=form.notes.data,
+        )
 
-        return redirect('/add')
+        db.session.add(pet)
+        db.session.commit()
+
+        # TODO: add flash message here
+        return redirect('/')
 
     else:
         return render_template('pets/add.html', form=form)
