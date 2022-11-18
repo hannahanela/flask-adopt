@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-DEFAULT_IMG_URL = "https://www.shutterstock.com/image-vector/dog-outline-icon-pet-vector-illustration-1497500723"
+DEFAULT_IMG_URL = "https://etc.usf.edu/clipart/70400/70421/70421_262_rg-240_o_sm.gif"
 
 
 class Pet(db.Model):
@@ -31,7 +31,7 @@ class Pet(db.Model):
     photo_url = db.Column(
         db.String,
         nullable=False,
-        default=DEFAULT_IMG_URL
+        default=DEFAULT_IMG_URL,
     )
 
     # select from ['baby', 'young', 'adult', 'senior']
