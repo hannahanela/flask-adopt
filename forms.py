@@ -18,6 +18,11 @@ class AddPetForm(FlaskForm):
         "Pet species",
         validators=[
             InputRequired(),
+            choices=[
+                ('cat', 'Cat'),
+                ('dog', 'Dog'),
+                ('porcupine', 'Porcupine'),
+            ],
         ],
     )
     photo_url = StringField(
