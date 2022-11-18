@@ -14,15 +14,15 @@ class AddPetForm(FlaskForm):
             Length(max=50, message='Name must be less than %(max)d characters.')
         ],
     )
-    species = StringField(
+    species = SelectField(
         "Pet species",
+        choices=[
+            ('cat', 'Cat'),
+            ('dog', 'Dog'),
+            ('porcupine', 'Porcupine'),
+        ],
         validators=[
             InputRequired(),
-            choices=[
-                ('cat', 'Cat'),
-                ('dog', 'Dog'),
-                ('porcupine', 'Porcupine'),
-            ],
         ],
     )
     photo_url = StringField(
