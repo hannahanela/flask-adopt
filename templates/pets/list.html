@@ -4,6 +4,38 @@
 
 {% block content %}
 
+<!-- Carousel -->
+<div id="pets" class="carousel slide p-5" data-bs-ride="carousel">
+
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#pets" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#pets" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#pets" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- The slideshow/carousel -->
+  <!-- TODO: update to only show most recent pets W/ photos that aren't the default -->
+  <div class="carousel-inner">
+    {% for pet in pets %}
+    <div class="carousel-item active">
+      <img src="{{ pet.photo_url }}" alt="{{ pet.name }}" class="img-fluid d-block w-75">
+      <div class="carousel-caption">
+        <a href="/{{ pet.id }}"><h3>{{ pet.name }}</h3></a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
 <h2>Pets</h2>
 
 {% for pet in pets %}
