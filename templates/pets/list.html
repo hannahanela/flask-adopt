@@ -7,7 +7,9 @@
 <h2>Pets</h2>
 
 {% for pet in pets %}
-  <img src="{{ pet.photo_url }}" alt="{{ pet.name }}">
+  <a href="/{{ pet.id }}">
+    <img class="img-fluid" src="{{ pet.photo_url }}" alt="{{ pet.name }}">
+  </a>
   <p>
     {{ pet.name }} {% if pet.available == True %}<b>is available!</b>{% endif %}
   </p>
