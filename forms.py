@@ -14,6 +14,7 @@ class AddPetForm(FlaskForm):
             Length(max=50, message='Name must be less than %(max)d characters.')
         ],
     )
+
     species = SelectField(
         "Pet species",
         choices=[
@@ -25,6 +26,7 @@ class AddPetForm(FlaskForm):
             InputRequired(),
         ],
     )
+
     photo_url = StringField(
         "Photo of pet",
         validators=[
@@ -32,6 +34,7 @@ class AddPetForm(FlaskForm):
             URL(),
         ],
     )
+
     age = SelectField(
         "Pet Age",
         choices=[
@@ -44,8 +47,35 @@ class AddPetForm(FlaskForm):
             InputRequired(),
         ],
     )
+    
     notes = TextAreaField(
         "Notes",
+        validators=[
+            Optional(),
+        ],
+    )
+
+
+class EditPetForm(FlaskForm):
+    """Form for editing pets."""
+
+    photo_url = StringField(
+        "Photo of pet",
+        validators=[
+            Optional(),
+            URL(),
+        ],
+    )
+
+    notes = TextAreaField(
+        "Notes",
+        validators=[
+            Optional(),
+        ],
+    )
+
+    available = BooleanField(
+        "Availability",
         validators=[
             Optional(),
         ],
