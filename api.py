@@ -13,8 +13,8 @@ PETFINDER_SECRET_KEY = os.environ['PETFINDER_SECRET_KEY']
 OAUTH_URL = 'https://api.petfinder.com/v2/oauth2/token'
 API_URL = 'https://api.petfinder.com/v2/animals?limit=100'
 
-# payload = {'limit': '100'}
-# params=payload
+DEFAULT_IMG_URL = "https://etc.usf.edu/clipart/70400/70421/70421_262_rg-240_o_sm.gif"
+
 
 def update_auth_token_string():
     """Request new Oauth token from Petfinder."""
@@ -30,17 +30,17 @@ def update_auth_token_string():
 
     return f"{decoded_response['token_type']} {decoded_response['access_token']}"
 
-def get_random_pet():
+def get_random_pet(token):
     """Get a random pet from Petfinder and return name, age, and photo URL."""
-    token_string = update_auth_token_string()
     headers = {
-        'authorization': token_string,
+        'authorization': token,
     }
     params = {
         'limit': 100,
     }
     response = requests.get(API_URL, headers=headers, params=params)
 
+    # TODO: add status code validation
     decoded_response = response.json()
 
     pet_data = choice(decoded_response['animals'])
@@ -48,7 +48,7 @@ def get_random_pet():
     pet = {
         'name': pet_data['name'],
         'age': pet_data['age'],
-        'photo_url': pet_data['photos'][0]['small'] if pet_data['photos'] else None
+        'photo_url': pet_data['photos'][0]['medium'] if pet_data['photos'] else DEFAULT_IMG_URL
     }
 
     return pet
