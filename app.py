@@ -4,6 +4,7 @@ from flask import Flask, url_for, render_template, redirect, flash, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Pet
 from forms import AddPetForm, EditPetForm
+from api import update_auth_token_string, get_random_pet
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///adopt"
@@ -14,16 +15,30 @@ app.config['SECRET_KEY'] = "secret"
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
+auth_token = None
+
 connect_db(app)
 db.create_all()
+
+
+@app.before_first_request
+def refresh_credentials():
+    """Get token and store it globally (one time only)."""
+    global auth_token
+    auth_token = update_auth_token_string()
 
 
 @app.get('/')
 def homepage_index():
     """Show list of pets as homepage."""
     pets = Pet.query.all()
+    petfinder_pet = get_random_pet(auth_token)
 
-    return render_template('pets/list.html', pets=pets)
+    return render_template(
+        'pets/list.html', 
+        pets=pets, 
+        petfinder_pet=petfinder_pet,
+    )
 
 
 @app.route('/add', methods=['GET', 'POST'])
